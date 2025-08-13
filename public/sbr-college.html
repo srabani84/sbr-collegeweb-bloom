@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    Sashi Bhusan Rath Govt. Women's College - Single Page Website
+    Tech: HTML + Tailwind CSS (CDN) + Vanilla JavaScript
+    Notes:
+    - Fully responsive using Tailwind's responsive utilities
+    - Semantic HTML5 structure
+    - Interactive: Auto-scrolling announcements + Animated counters on viewport
+    - Comments inline to explain sections and logic
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sashi Bhusan Rath Govt. Women's College | Berhampur</title>
+  <meta name="description" content="Sashi Bhusan Rath Government Women's College, Berhampur. Academics, facilities, events, alumni, and more." />
+  <meta name="author" content="SBR Govt. Women's College" />
+  <link rel="canonical" href="/sbr-college.html" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Sashi Bhusan Rath Govt. Women's College" />
+  <meta property="og:description" content="Explore academics, facilities, events, and alumni at SBR Govt. Women's College, Berhampur." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/sbr-college.html" />
+  <meta property="og:image" content="/favicon.ico" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind config: custom colors and fonts
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0A192F',     // Dark header/footer
+            primary: '#2563EB',  // Accent blue
+            gold: '#f59e0b'      // Golden accent
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'],
+            serifTitle: ['Georgia', 'Times New Roman', 'Times', 'serif']
+          },
+          boxShadow: {
+            card: '0 8px 24px -8px rgba(2, 6, 23, 0.15)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Inter font (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome for placeholder icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/J6MdLecxB2nZzO4q5dZ3V9Zl+JxN8Gx4w2f7v3iC0yq3dG6z8Jb2H3X0m9f2yJ9iZB4jKQf1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* Starry background for Alumni Galaxy */
+    .starfield {
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 60%) 0 0/4px 4px repeat,
+                  radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 70%) 2px 2px/3px 3px repeat,
+                  linear-gradient(180deg, #0b1220 0%, #070b14 100%);
+    }
+    /* Reduce motion preference handling for animations */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-scroll { animation: none !important; }
+    }
+  </style>
+
+  <!-- Organization JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollegeOrUniversity",
+    "name": "Sashi Bhusan Rath Government Women's College",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Infront of OSRTC Garage, Khallikote College Road",
+      "addressLocality": "Berhampur",
+      "addressRegion": "Odisha",
+      "postalCode": "760001",
+      "addressCountry": "IN"
+    },
+    "url": "/sbr-college.html"
+  }
+  </script>
+</head>
+<body class="font-sans text-slate-800 bg-white">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-navy focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+
+  <header>
+    <!-- Topbar -->
+    <div class="bg-navy text-white text-sm">
+      <div class="max-w-7xl mx-auto px-4 lg:px-6 py-2">
+        <nav aria-label="Top links">
+          <ul class="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <li><a href="#" class="hover:underline">FEEDBACK</a></li>
+            <li class="opacity-60">|</li>
+            <li><a href="#" class="hover:underline">SAMS</a></li>
+            <li class="opacity-60">|</li>
+            <li><a href="#" class="hover:underline">ANTI-RAGGING FORM</a></li>
+            <li class="opacity-60">|</li>
+            <li><a href="#footer" class="hover:underline">CONTACT US</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Main header with logo + titles + primary navigation -->
+    <div class="border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 lg:px-6 py-4 md:py-6">
+        <div class="flex items-center justify-between gap-6">
+          <!-- Left: Logo + Titles -->
+          <div class="flex items-center gap-4">
+            <!-- Circular logo (placeholder SVG) -->
+            <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/10 ring-2 ring-primary/30 grid place-items-center">
+              <svg aria-hidden="true" class="w-10 h-10 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.15" />
+                <path d="M6 8h12M6 12h12M6 16h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div>
+              <h1 class="font-serifTitle text-xl md:text-2xl lg:text-3xl font-bold leading-tight text-navy">SASHI BHUSAN RATH GOVT. WOMEN'S COLLEGE</h1>
+              <p class="text-slate-600 text-base md:text-lg">ଶଶି ଭୂଷଣ ରଥ ସରକାରୀ ମହିଳା ମହାବିଦ୍ୟାଳୟ</p>
+              <p class="text-slate-500 text-sm md:text-base">Higher Education Department, Government of Odisha</p>
+            </div>
+          </div>
+
+          <!-- Right: Primary Nav (desktop) -->
+          <nav class="hidden lg:block" aria-label="Primary">
+            <ul class="flex items-center gap-6 text-sm font-semibold uppercase tracking-wide">
+              <li><a href="#about" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">About Us</a></li>
+              <li><a href="#academics" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">Academics</a></li>
+              <li><a href="#examination" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">Examination</a></li>
+              <li><a href="#department" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">Department</a></li>
+              <li><a href="#facilities" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">Facilities</a></li>
+              <li><a href="#naac" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">NAAC & IQAC</a></li>
+            </ul>
+          </nav>
+
+          <!-- Mobile menu button -->
+          <button id="menuBtn" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md ring-1 ring-slate-300 text-slate-700 hover:bg-slate-50" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Nav -->
+        <nav id="mobileNav" class="mt-4 hidden lg:hidden" aria-label="Mobile Primary">
+          <ul class="grid gap-2 text-sm font-semibold uppercase tracking-wide">
+            <li><a href="#about" class="block px-3 py-2 rounded hover:bg-primary/10">About Us</a></li>
+            <li><a href="#academics" class="block px-3 py-2 rounded hover:bg-primary/10">Academics</a></li>
+            <li><a href="#examination" class="block px-3 py-2 rounded hover:bg-primary/10">Examination</a></li>
+            <li><a href="#department" class="block px-3 py-2 rounded hover:bg-primary/10">Department</a></li>
+            <li><a href="#facilities" class="block px-3 py-2 rounded hover:bg-primary/10">Facilities</a></li>
+            <li><a href="#naac" class="block px-3 py-2 rounded hover:bg-primary/10">NAAC & IQAC</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero Section: Principal's Message + Updates/Events -->
+    <section aria-labelledby="principal" class="max-w-7xl mx-auto px-4 lg:px-6 py-10 md:py-14">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <!-- Left: Principal's Message -->
+        <article class="bg-white rounded-xl ring-1 ring-slate-200 p-6 md:p-8">
+          <header class="mb-4">
+            <p class="text-sm font-semibold tracking-widest text-primary">PRINCIPAL'S MESSAGE</p>
+            <h2 id="principal" class="mt-2 text-2xl md:text-3xl font-bold text-navy">Welcome to Sashi Bhusan Rath Government Women's College, Berhampur</h2>
+          </header>
+          <div class="space-y-4 text-slate-700 leading-relaxed">
+            <p>It is my privilege to welcome you to SBR Government Women's College—an institution dedicated to academic excellence, holistic development, and empowerment. Here, learning is a journey shaped by curiosity, compassion, and character.</p>
+            <p>We strive to provide a vibrant environment that nurtures leadership, innovation, and integrity. Our dedicated faculty, diverse programs, and state-of-the-art facilities ensure that every student receives the guidance and resources needed to excel in both academics and life.</p>
+            <p>Together, we foster a culture of inclusivity and lifelong learning, inspiring our students to become responsible citizens and confident professionals who contribute meaningfully to society.</p>
+          </div>
+          <footer class="mt-6">
+            <p class="font-semibold text-slate-900">DR. CHITTA RANJAN SATPATHY <span class="text-slate-500 font-normal">(PRINCIPAL)</span></p>
+          </footer>
+        </article>
+
+        <!-- Right: Updates and Events -->
+        <aside class="grid gap-6">
+          <!-- Updates Box -->
+          <section aria-labelledby="updates" class="bg-white rounded-xl ring-1 ring-slate-200">
+            <header class="px-6 pt-6">
+              <h3 id="updates" class="text-lg font-bold text-navy">Important Updates</h3>
+            </header>
+            <div class="px-6 pb-6">
+              <!-- Auto-scroll container: duplicated list scrolls vertically via JS -->
+              <div class="auto-scroll-container relative h-48 overflow-hidden" data-speed="0.6">
+                <ul class="auto-scroll-list space-y-3 text-sm text-slate-700">
+                  <li><a href="#" class="block hover:text-primary">Admission Notice 2025-26 published. Apply via SAMS portal.</a></li>
+                  <li><a href="#" class="block hover:text-primary">UG 2nd Semester Examination Schedule released.</a></li>
+                  <li><a href="#" class="block hover:text-primary">Library will remain open from 8:00 AM to 6:00 PM during exams.</a></li>
+                  <li><a href="#" class="block hover:text-primary">NSS Enrollment drive: Register by 20th August.</a></li>
+                  <li><a href="#" class="block hover:text-primary">Scholarship renewal window now open for eligible students.</a></li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Events Box -->
+          <section aria-labelledby="events" class="bg-white rounded-xl ring-1 ring-slate-200">
+            <header class="px-6 pt-6">
+              <h3 id="events" class="text-lg font-bold text-navy">Recent / Upcoming Events</h3>
+            </header>
+            <div class="px-6 pb-6">
+              <div class="auto-scroll-container relative h-48 overflow-hidden" data-speed="0.5">
+                <ul class="auto-scroll-list space-y-3 text-sm text-slate-700">
+                  <li><a href="#" class="block hover:text-primary">Orientation Programme for Freshers – 12th July</a></li>
+                  <li><a href="#" class="block hover:text-primary">International Yoga Day Celebration – Highlights</a></li>
+                  <li><a href="#" class="block hover:text-primary">Alumni Meet 2025 – Registrations Open</a></li>
+                  <li><a href="#" class="block hover:text-primary">Seminar: Women in STEM – Next Week</a></li>
+                  <li><a href="#" class="block hover:text-primary">Cultural Fest Preparations – Volunteer Signup</a></li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section id="facilities" aria-labelledby="facilities-title" class="max-w-7xl mx-auto px-4 lg:px-6 py-12 md:py-16">
+      <header class="text-center mb-10">
+        <p class="text-sm font-semibold tracking-widest text-primary">FACILITIES</p>
+        <h2 id="facilities-title" class="mt-2 text-3xl md:text-4xl font-bold text-navy">Campus Facilities</h2>
+      </header>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <!-- Card -->
+        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow">
+          <div class="w-12 h-12 mx-auto rounded-full bg-primary/10 text-primary grid place-items-center mb-4">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">E-Library</h3>
+          <p class="text-slate-600 text-sm mt-2">Digital resources and quiet study spaces for all students.</p>
+        </article>
+        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow">
+          <div class="w-12 h-12 mx-auto rounded-full bg-primary/10 text-primary grid place-items-center mb-4">
+            <i class="fa-solid fa-house"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">Hostel</h3>
+          <p class="text-slate-600 text-sm mt-2">Safe and comfortable residential facilities on campus.</p>
+        </article>
+        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow">
+          <div class="w-12 h-12 mx-auto rounded-full bg-primary/10 text-primary grid place-items-center mb-4">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">Canteen</h3>
+          <p class="text-slate-600 text-sm mt-2">Nutritious meals and refreshments throughout the day.</p>
+        </article>
+        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow">
+          <div class="w-12 h-12 mx-auto rounded-full bg-primary/10 text-primary grid place-items-center mb-4">
+            <i class="fa-solid fa-dumbbell"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">Gymnasium</h3>
+          <p class="text-slate-600 text-sm mt-2">Well-equipped fitness center for health and wellness.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- At a Glance Section -->
+    <section aria-labelledby="glance" class="text-white">
+      <div class="bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700">
+        <div class="max-w-7xl mx-auto px-4 lg:px-6 py-12 md:py-16">
+          <header class="text-center mb-10">
+            <p class="text-sm font-semibold tracking-widest text-yellow-200">AT A GLANCE</p>
+            <h2 id="glance" class="mt-2 text-3xl md:text-4xl font-bold">SBRG Women's College in Numbers</h2>
+          </header>
+
+          <!-- Counters Grid -->
+          <div id="counterGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 md:gap-8 text-center">
+            <div class="space-y-1">
+              <div class="text-3xl md:text-4xl font-extrabold" data-count="18">0</div>
+              <p class="text-sm opacity-90">Academic Departments</p>
+            </div>
+            <div class="space-y-1">
+              <div class="text-3xl md:text-4xl font-extrabold" data-count="86">0</div>
+              <p class="text-sm opacity-90">Teaching Staffs</p>
+            </div>
+            <div class="space-y-1">
+              <div class="text-3xl md:text-4xl font-extrabold" data-count="34">0</div>
+              <p class="text-sm opacity-90">Non-Teaching Staffs</p>
+            </div>
+            <div class="space-y-1">
+              <div class="text-3xl md:text-4xl font-extrabold" data-count="6">0</div>
+              <p class="text-sm opacity-90">Professional Courses</p>
+            </div>
+            <div class="space-y-1">
+              <div class="text-3xl md:text-4xl font-extrabold" data-count="1200">0</div>
+              <p class="text-sm opacity-90">Intermediate Students</p>
+            </div>
+            <div class="space-y-1">
+              <div class="text-3xl md:text-4xl font-extrabold" data-count="2400">0</div>
+              <p class="text-sm opacity-90">UG Students</p>
+            </div>
+            <div class="space-y-1">
+              <div class="text-3xl md:text-4xl font-extrabold" data-count="320">0</div>
+              <p class="text-sm opacity-90">PG Students</p>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="mt-10 md:mt-12">
+            <form class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+              <label class="block" for="dept">
+                <span class="block text-sm font-medium mb-2">Department</span>
+                <select id="dept" class="w-full rounded-md border-0 text-slate-900 px-3 py-2 ring-1 ring-white/20 bg-white/90 focus:ring-2 focus:ring-yellow-300">
+                  <option>All Departments</option>
+                  <option>Arts</option>
+                  <option>Science</option>
+                  <option>Commerce</option>
+                </select>
+              </label>
+              <label class="block" for="year">
+                <span class="block text-sm font-medium mb-2">Year of completion</span>
+                <select id="year" class="w-full rounded-md border-0 text-slate-900 px-3 py-2 ring-1 ring-white/20 bg:white/90 bg-white/90 focus:ring-2 focus:ring-yellow-300">
+                  <option>Any</option>
+                  <option>2025</option>
+                  <option>2024</option>
+                  <option>2023</option>
+                </select>
+              </label>
+              <label class="block" for="qualification">
+                <span class="block text-sm font-medium mb-2">Highest Qualification</span>
+                <select id="qualification" class="w-full rounded-md border-0 text-slate-900 px-3 py-2 ring-1 ring-white/20 bg-white/90 focus:ring-2 focus:ring-yellow-300">
+                  <option>Any</option>
+                  <option>Intermediate</option>
+                  <option>UG</option>
+                  <option>PG</option>
+                </select>
+              </label>
+              <button type="button" class="inline-flex items-center justify-center h-11 rounded-md bg-gold text-navy font-semibold shadow hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300">Show Results</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alumni Galaxy Section -->
+    <section aria-labelledby="alumni" class="starfield">
+      <div class="max-w-7xl mx-auto px-4 lg:px-6 py-14 md:py-20 text-center text-white">
+        <header>
+          <h2 id="alumni" class="text-3xl md:text-4xl font-bold">Alumni Galaxy</h2>
+          <p class="mt-2 text-slate-200">Where stars once walked the halls</p>
+        </header>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#" class="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-gold text-navy font-semibold shadow hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300">
+            <i class="fa-solid fa-star"></i> Explore Galaxy
+          </a>
+          <a href="#" class="inline-flex items-center gap-2 h-12 px-6 rounded-full border border-white/30 text-white font-semibold hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300">
+            <i class="fa-solid fa-pen"></i> Share Your Story
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="bg-navy text-white">
+    <section class="max-w-7xl mx-auto px-4 lg:px-6 py-12 md:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <!-- Contact & Address -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">Contact Us</h3>
+          <p class="font-semibold">SASHI BHUSAN RATH GOVERNMENT WOMEN'S COLLEGE</p>
+          <p class="mt-2 text-slate-300">At: Infront of OSRTC Garage, Khallikote College Road,<br/> Berhampur, Ganjam, Odisha - 760001</p>
+          <div class="mt-4 space-y-2 text-slate-300">
+            <p><i class="fa-solid fa-envelope mr-2 text-gold"></i> Email: info@sbrgwc.ac.in</p>
+            <p><i class="fa-solid fa-phone mr-2 text-gold"></i> Tel: +91-00000-00000</p>
+          </div>
+        </div>
+        <!-- Quick Links -->
+        <nav aria-label="Quick Links">
+          <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+          <ul class="grid gap-2 text-slate-300">
+            <li><a href="#" class="hover:text-gold">Berhampur University</a></li>
+            <li><a href="#" class="hover:text-gold">CHSE Odisha</a></li>
+            <li><a href="#" class="hover:text-gold">DHE Odisha</a></li>
+            <li><a href="#" class="hover:text-gold">SAMS</a></li>
+            <li><a href="#" class="hover:text-gold">NAAC</a></li>
+            <li><a href="#" class="hover:text-gold">UGC</a></li>
+            <li><a href="#" class="hover:text-gold">DigiLocker</a></li>
+          </ul>
+        </nav>
+        <!-- Map -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">Locate Us</h3>
+          <div class="rounded-lg overflow-hidden ring-1 ring-white/10">
+            <iframe title="College Location Map" src="https://www.google.com/maps?q=Berhampur%20Odisha&output=embed" width="100%" height="260" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="bg-black/30">
+      <div class="max-w-7xl mx-auto px-4 lg:px-6 py-4 text-center text-sm text-slate-300">
+        Copyright © SBRG Women's College, Berhampur
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    // Mobile navigation toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    if (menuBtn && mobileNav) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobileNav.classList.toggle('hidden');
+        menuBtn.setAttribute('aria-expanded', String(!isOpen));
+      });
+    }
+
+    // Auto-scrolling announcements/events
+    // Logic: Duplicate the list inside each container and increase scrollTop smoothly.
+    // When scrollTop exceeds original list height, reset to 0 for seamless looping.
+    function initAutoScroll(container, speed = 0.5) {
+      const list = container.querySelector('.auto-scroll-list');
+      if (!list) return;
+
+      const clone = list.cloneNode(true);
+      container.appendChild(clone);
+
+      let paused = false;
+      let lastTime = 0;
+      const pxPerMs = speed; // pixels per ms
+
+      const step = (ts) => {
+        if (!lastTime) lastTime = ts;
+        const delta = ts - lastTime;
+        lastTime = ts;
+        if (!paused) {
+          container.scrollTop += delta * pxPerMs;
+          if (container.scrollTop >= list.scrollHeight) {
+            container.scrollTop = 0; // loop
+          }
+        }
+        requestAnimationFrame(step);
+      };
+
+      // Pause on hover/focus for accessibility
+      container.addEventListener('mouseenter', () => paused = true);
+      container.addEventListener('mouseleave', () => paused = false);
+      container.addEventListener('focusin', () => paused = true);
+      container.addEventListener('focusout', () => paused = false);
+
+      requestAnimationFrame(step);
+    }
+
+    document.querySelectorAll('.auto-scroll-container').forEach((el) => {
+      const speed = parseFloat(el.getAttribute('data-speed')) || 0.5;
+      initAutoScroll(el, speed);
+    });
+
+    // Animated counters when in viewport
+    // Uses IntersectionObserver to start animation once per page load
+    function animateCount(el, duration = 2000) {
+      const target = parseInt(el.getAttribute('data-count') || '0', 10);
+      const start = 0;
+      const startTime = performance.now();
+
+      function tick(now) {
+        const p = Math.min((now - startTime) / duration, 1);
+        // EaseOutCubic for smoother finish
+        const eased = 1 - Math.pow(1 - p, 3);
+        const value = Math.floor(start + (target - start) * eased);
+        el.textContent = value.toLocaleString();
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    const countersParent = document.getElementById('counterGrid');
+    if ('IntersectionObserver' in window && countersParent) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            countersParent.querySelectorAll('[data-count]').forEach((el) => animateCount(el));
+            obs.disconnect(); // run once
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(countersParent);
+    } else if (countersParent) {
+      // Fallback: animate immediately
+      countersParent.querySelectorAll('[data-count]').forEach((el) => animateCount(el));
+    }
+  </script>
+</body>
+</html>
