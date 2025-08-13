@@ -28,11 +28,11 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Tailwind config: custom colors and fonts
+    // Tailwind config: custom colors, fonts, and animations
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
+          colors: { 
             navy: '#0A192F',     // Dark header/footer
             primary: '#2563EB',  // Accent blue
             gold: '#f59e0b'      // Golden accent
@@ -43,6 +43,52 @@
           },
           boxShadow: {
             card: '0 8px 24px -8px rgba(2, 6, 23, 0.15)'
+          },
+          keyframes: {
+            'accordion-down': {
+              from: { height: '0', opacity: '0' },
+              to: { height: 'var(--radix-accordion-content-height)', opacity: '1' }
+            },
+            'accordion-up': {
+              from: { height: 'var(--radix-accordion-content-height)', opacity: '1' },
+              to: { height: '0', opacity: '0' }
+            },
+            'fade-in': {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            'fade-out': {
+              '0%': { opacity: '1', transform: 'translateY(0)' },
+              '100%': { opacity: '0', transform: 'translateY(10px)' }
+            },
+            'scale-in': {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' }
+            },
+            'scale-out': {
+              from: { transform: 'scale(1)', opacity: '1' },
+              to: { transform: 'scale(0.95)', opacity: '0' }
+            },
+            'slide-in-right': {
+              '0%': { transform: 'translateX(100%)' },
+              '100%': { transform: 'translateX(0)' }
+            },
+            'slide-out-right': {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(100%)' }
+            }
+          },
+          animation: {
+            'accordion-down': 'accordion-down 0.2s ease-out',
+            'accordion-up': 'accordion-up 0.2s ease-out',
+            'fade-in': 'fade-in 0.3s ease-out',
+            'fade-out': 'fade-out 0.3s ease-out',
+            'scale-in': 'scale-in 0.2s ease-out',
+            'scale-out': 'scale-out 0.2s ease-out',
+            'slide-in-right': 'slide-in-right 0.3s ease-out',
+            'slide-out-right': 'slide-out-right 0.3s ease-out',
+            'enter': 'fade-in 0.3s ease-out, scale-in 0.2s ease-out',
+            'exit': 'fade-out 0.3s ease-out, scale-out 0.2s ease-out'
           }
         }
       }
@@ -67,6 +113,28 @@
     @media (prefers-reduced-motion: reduce) {
       .animate-scroll { animation: none !important; }
     }
+    /* Underline animation for links */
+    .story-link { position: relative; display: inline-block; }
+    .story-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      height: 2px;
+      width: 100%;
+      background-color: #2563EB;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+    .story-link:hover::after,
+    .story-link:focus::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+    /* Hover scale utility */
+    .hover-scale { transition: transform 0.2s ease; }
+    .hover-scale:hover { transform: scale(1.05); }
   </style>
 
   <!-- Organization JSON-LD -->
@@ -96,13 +164,13 @@
       <div class="max-w-7xl mx-auto px-4 lg:px-6 py-2">
         <nav aria-label="Top links">
           <ul class="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <li><a href="#" class="hover:underline">FEEDBACK</a></li>
+            <li><a href="#" class="story-link">FEEDBACK</a></li>
             <li class="opacity-60">|</li>
-            <li><a href="#" class="hover:underline">SAMS</a></li>
+            <li><a href="#" class="story-link">SAMS</a></li>
             <li class="opacity-60">|</li>
-            <li><a href="#" class="hover:underline">ANTI-RAGGING FORM</a></li>
+            <li><a href="#" class="story-link">ANTI-RAGGING FORM</a></li>
             <li class="opacity-60">|</li>
-            <li><a href="#footer" class="hover:underline">CONTACT US</a></li>
+            <li><a href="#footer" class="story-link">CONTACT US</a></li>
           </ul>
         </nav>
       </div>
@@ -131,12 +199,12 @@
           <!-- Right: Primary Nav (desktop) -->
           <nav class="hidden lg:block" aria-label="Primary">
             <ul class="flex items-center gap-6 text-sm font-semibold uppercase tracking-wide">
-              <li><a href="#about" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">About Us</a></li>
-              <li><a href="#academics" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">Academics</a></li>
-              <li><a href="#examination" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">Examination</a></li>
-              <li><a href="#department" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">Department</a></li>
-              <li><a href="#facilities" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">Facilities</a></li>
-              <li><a href="#naac" class="text-slate-700 hover:text-primary hover:underline underline-offset-4">NAAC & IQAC</a></li>
+              <li><a href="#about" class="text-slate-700 hover:text-primary story-link">About Us</a></li>
+              <li><a href="#academics" class="text-slate-700 hover:text-primary story-link">Academics</a></li>
+              <li><a href="#examination" class="text-slate-700 hover:text-primary story-link">Examination</a></li>
+              <li><a href="#department" class="text-slate-700 hover:text-primary story-link">Department</a></li>
+              <li><a href="#facilities" class="text-slate-700 hover:text-primary story-link">Facilities</a></li>
+              <li><a href="#naac" class="text-slate-700 hover:text-primary story-link">NAAC & IQAC</a></li>
             </ul>
           </nav>
 
@@ -166,7 +234,7 @@
     <section aria-labelledby="principal" class="max-w-7xl mx-auto px-4 lg:px-6 py-10 md:py-14">
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <!-- Left: Principal's Message -->
-        <article class="bg-white rounded-xl ring-1 ring-slate-200 p-6 md:p-8">
+        <article class="bg-white rounded-xl ring-1 ring-slate-200 p-6 md:p-8 animate-fade-in">
           <header class="mb-4">
             <p class="text-sm font-semibold tracking-widest text-primary">PRINCIPAL'S MESSAGE</p>
             <h2 id="principal" class="mt-2 text-2xl md:text-3xl font-bold text-navy">Welcome to Sashi Bhusan Rath Government Women's College, Berhampur</h2>
@@ -184,13 +252,13 @@
         <!-- Right: Updates and Events -->
         <aside class="grid gap-6">
           <!-- Updates Box -->
-          <section aria-labelledby="updates" class="bg-white rounded-xl ring-1 ring-slate-200">
+          <section aria-labelledby="updates" class="bg-white rounded-xl ring-1 ring-slate-200 animate-fade-in">
             <header class="px-6 pt-6">
               <h3 id="updates" class="text-lg font-bold text-navy">Important Updates</h3>
             </header>
             <div class="px-6 pb-6">
               <!-- Auto-scroll container: duplicated list scrolls vertically via JS -->
-              <div class="auto-scroll-container relative h-48 overflow-hidden" data-speed="0.6">
+              <div class="auto-scroll-container relative h-48 overflow-hidden" data-speed="0.6" aria-live="polite" role="region">
                 <ul class="auto-scroll-list space-y-3 text-sm text-slate-700">
                   <li><a href="#" class="block hover:text-primary">Admission Notice 2025-26 published. Apply via SAMS portal.</a></li>
                   <li><a href="#" class="block hover:text-primary">UG 2nd Semester Examination Schedule released.</a></li>
@@ -203,12 +271,12 @@
           </section>
 
           <!-- Events Box -->
-          <section aria-labelledby="events" class="bg-white rounded-xl ring-1 ring-slate-200">
+          <section aria-labelledby="events" class="bg-white rounded-xl ring-1 ring-slate-200 animate-fade-in">
             <header class="px-6 pt-6">
               <h3 id="events" class="text-lg font-bold text-navy">Recent / Upcoming Events</h3>
             </header>
             <div class="px-6 pb-6">
-              <div class="auto-scroll-container relative h-48 overflow-hidden" data-speed="0.5">
+              <div class="auto-scroll-container relative h-48 overflow-hidden" data-speed="0.5" aria-live="polite" role="region">
                 <ul class="auto-scroll-list space-y-3 text-sm text-slate-700">
                   <li><a href="#" class="block hover:text-primary">Orientation Programme for Freshers – 12th July</a></li>
                   <li><a href="#" class="block hover:text-primary">International Yoga Day Celebration – Highlights</a></li>
@@ -231,28 +299,28 @@
       </header>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         <!-- Card -->
-        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow">
+        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow hover-scale animate-fade-in">
           <div class="w-12 h-12 mx-auto rounded-full bg-primary/10 text-primary grid place-items-center mb-4">
             <i class="fa-solid fa-book-open"></i>
           </div>
           <h3 class="font-semibold text-lg text-navy">E-Library</h3>
           <p class="text-slate-600 text-sm mt-2">Digital resources and quiet study spaces for all students.</p>
         </article>
-        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow">
+        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow hover-scale animate-fade-in">
           <div class="w-12 h-12 mx-auto rounded-full bg-primary/10 text-primary grid place-items-center mb-4">
             <i class="fa-solid fa-house"></i>
           </div>
           <h3 class="font-semibold text-lg text-navy">Hostel</h3>
           <p class="text-slate-600 text-sm mt-2">Safe and comfortable residential facilities on campus.</p>
         </article>
-        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow">
+        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow hover-scale animate-fade-in">
           <div class="w-12 h-12 mx-auto rounded-full bg-primary/10 text-primary grid place-items-center mb-4">
             <i class="fa-solid fa-utensils"></i>
           </div>
           <h3 class="font-semibold text-lg text-navy">Canteen</h3>
           <p class="text-slate-600 text-sm mt-2">Nutritious meals and refreshments throughout the day.</p>
         </article>
-        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow">
+        <article class="group bg-white rounded-xl ring-1 ring-slate-200 p-6 text-center hover:shadow-card transition-shadow hover-scale animate-fade-in">
           <div class="w-12 h-12 mx-auto rounded-full bg-primary/10 text-primary grid place-items-center mb-4">
             <i class="fa-solid fa-dumbbell"></i>
           </div>
@@ -333,7 +401,7 @@
                   <option>PG</option>
                 </select>
               </label>
-              <button type="button" class="inline-flex items-center justify-center h-11 rounded-md bg-gold text-navy font-semibold shadow hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300">Show Results</button>
+              <button type="button" class="inline-flex items-center justify-center h-11 rounded-md bg-gold text-navy font-semibold shadow hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300 hover-scale">Show Results</button>
             </form>
           </div>
         </div>
@@ -348,10 +416,10 @@
           <p class="mt-2 text-slate-200">Where stars once walked the halls</p>
         </header>
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#" class="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-gold text-navy font-semibold shadow hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300">
+          <a href="#" class="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-gold text-navy font-semibold shadow hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300 hover-scale">
             <i class="fa-solid fa-star"></i> Explore Galaxy
           </a>
-          <a href="#" class="inline-flex items-center gap-2 h-12 px-6 rounded-full border border-white/30 text-white font-semibold hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300">
+          <a href="#" class="inline-flex items-center gap-2 h-12 px-6 rounded-full border border-white/30 text-white font-semibold hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-300 hover-scale">
             <i class="fa-solid fa-pen"></i> Share Your Story
           </a>
         </div>
@@ -377,13 +445,13 @@
         <nav aria-label="Quick Links">
           <h3 class="text-xl font-bold mb-4">Quick Links</h3>
           <ul class="grid gap-2 text-slate-300">
-            <li><a href="#" class="hover:text-gold">Berhampur University</a></li>
-            <li><a href="#" class="hover:text-gold">CHSE Odisha</a></li>
-            <li><a href="#" class="hover:text-gold">DHE Odisha</a></li>
-            <li><a href="#" class="hover:text-gold">SAMS</a></li>
-            <li><a href="#" class="hover:text-gold">NAAC</a></li>
-            <li><a href="#" class="hover:text-gold">UGC</a></li>
-            <li><a href="#" class="hover:text-gold">DigiLocker</a></li>
+            <li><a href="#" class="story-link hover:text-gold">Berhampur University</a></li>
+            <li><a href="#" class="story-link hover:text-gold">CHSE Odisha</a></li>
+            <li><a href="#" class="story-link hover:text-gold">DHE Odisha</a></li>
+            <li><a href="#" class="story-link hover:text-gold">SAMS</a></li>
+            <li><a href="#" class="story-link hover:text-gold">NAAC</a></li>
+            <li><a href="#" class="story-link hover:text-gold">UGC</a></li>
+            <li><a href="#" class="story-link hover:text-gold">DigiLocker</a></li>
           </ul>
         </nav>
         <!-- Map -->
